@@ -29,8 +29,8 @@ jobs:
         with: 
           java-version: '17'
       - name: 'Restore Project Dependencies Using Mvn'
-        shell: pwsh
-        run:
+        shell: bash
+        run: |
           pushd './${{ env.PACKAGE_DIRECTORY }}'
           mvn clean package
           popd
