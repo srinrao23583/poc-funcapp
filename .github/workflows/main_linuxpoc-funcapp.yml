@@ -35,6 +35,12 @@ jobs:
           mvn clean package
           popd
       
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+        with:
+          chrome-version: 120
+          install-dependencies: true
+      
       - name: Login to Azure
         uses: azure/login@v2
         with:
