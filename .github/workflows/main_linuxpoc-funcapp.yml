@@ -35,11 +35,8 @@ jobs:
           mvn clean package
           popd
       
-      - name: Install Chrome
-        uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: 120
-          install-dependencies: true
+      - name: Ensure browsers are installed
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
       
       - name: Login to Azure
         uses: azure/login@v2
