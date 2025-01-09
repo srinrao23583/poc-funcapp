@@ -41,7 +41,7 @@ public class Function {
         try (Playwright playwright = Playwright.create()) {
 			flowMessage = flowMessage + "Created PR, ";
             
-            Browser browser = playwright.chromium().launch();
+            Browser browser = playwright.firefox().launch();
             flowMessage = flowMessage + "Launchede chromium, ";
             // Create a new page and navigate to a URL
             Page page = browser.newPage();
