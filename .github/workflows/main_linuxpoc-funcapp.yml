@@ -37,6 +37,9 @@ jobs:
       
       - name: Ensure browsers are installed
         run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install --with-deps"
+        
+      - name: Ensure browser dependencies are installed
+        run: mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"
       
       - name: Login to Azure
         uses: azure/login@v2
