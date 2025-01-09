@@ -53,3 +53,6 @@ jobs:
           slot-name: 'Production'
           package: '${{ env.PACKAGE_DIRECTORY }}'
           respect-pom-xml: true
+          app-settings: |
+          PLAYWRIGHT_BROWSERS_PATH=/home/site/wwwroot/.local/lib/playwright-browsers
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1
