@@ -1,5 +1,7 @@
 package com.demo.FunctionAppTest;
 
+import java.util.Optional;
+
 import com.microsoft.azure.functions.ExecutionContext;
 import com.microsoft.azure.functions.HttpMethod;
 import com.microsoft.azure.functions.HttpRequestMessage;
@@ -8,8 +10,9 @@ import com.microsoft.azure.functions.HttpStatus;
 import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
-
-import java.util.Optional;
+import com.microsoft.playwright.Browser;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Playwright;
 
 /**
  * Azure Functions with HTTP Trigger.
@@ -33,11 +36,26 @@ public class Function {
         // Parse query parameter
         final String query = request.getQueryParameters().get("name");
         final String name = request.getBody().orElse(query);
-
+        String flowMessage = name + ", Started, ";
+        
+        try (Playwright playwright = Playwright.create()) {
+			flowMessage = flowMessage + "Created PR, ";
+            
+            Browser browser = playwright.chromium().launch();
+            flowMessage = flowMessage + "Launchede chromium, ";
+            // Create a new page and navigate to a URL
+            Page page = browser.newPage();
+            page.navigate("https://www.google.com/");
+            flowMessage = flowMessage + "Opened Page ";	
+            browser.close();
+        } catch(Exception e) {
+        	flowMessage = flowMessage + "Exception in playright, ";	
+        }
+        
         if (name == null) {
             return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body("Please pass a name on the query string or in the request body").build();
         } else {
-            return request.createResponseBuilder(HttpStatus.OK).body("Hello 1, " + name).build();
+            return request.createResponseBuilder(HttpStatus.OK).body("Hello 2, " + flowMessage).build();
         }
     }
 }
