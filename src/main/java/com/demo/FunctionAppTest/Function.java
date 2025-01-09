@@ -49,7 +49,7 @@ public class Function {
             flowMessage = flowMessage + "Opened Page ";	
             browser.close();
         } catch(Exception e) {
-        	flowMessage = flowMessage + "Exception in playright, ";	
+        	flowMessage = flowMessage + "Exception in playright, " + e.getMessage();	
         }
         
         if (name == null) {
