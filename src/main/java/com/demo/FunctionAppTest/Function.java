@@ -1,6 +1,5 @@
 package com.demo.FunctionAppTest;
 
-import java.nio.file.Paths;
 import java.util.Optional;
 
 import com.microsoft.azure.functions.ExecutionContext;
@@ -12,7 +11,6 @@ import com.microsoft.azure.functions.annotation.AuthorizationLevel;
 import com.microsoft.azure.functions.annotation.FunctionName;
 import com.microsoft.azure.functions.annotation.HttpTrigger;
 import com.microsoft.playwright.Browser;
-import com.microsoft.playwright.BrowserType;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Playwright;
 
@@ -42,10 +40,8 @@ public class Function {
         
         try (Playwright playwright = Playwright.create()) {
 			flowMessage = flowMessage + "Created PR, ";
-			String executablePath = playwright.chromium().executablePath();
-			flowMessage = flowMessage + "Path:" + executablePath + ", ";
-            Browser browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
-                    .setExecutablePath(Paths.get(executablePath)));
+			flowMessage = flowMessage + "Path:" + playwright.chromium().executablePath() + ", ";
+            Browser browser = playwright.chromium().launch();
             flowMessage = flowMessage + "Launched chromium, ";
             // Create a new page and navigate to a URL
             Page page = browser.newPage();
