@@ -41,8 +41,8 @@ public class Function {
         try (Playwright playwright = Playwright.create()) {
 			flowMessage = flowMessage + "Created PR, ";
             
-            Browser browser = playwright.firefox().launch();
-            flowMessage = flowMessage + "Launchede chromium, ";
+            Browser browser = playwright.chromium().launch();
+            flowMessage = flowMessage + "Launched chromium, ";
             // Create a new page and navigate to a URL
             Page page = browser.newPage();
             page.navigate("https://www.google.com/");
@@ -55,7 +55,7 @@ public class Function {
         if (name == null) {
             return request.createResponseBuilder(HttpStatus.BAD_REQUEST).body("Please pass a name on the query string or in the request body").build();
         } else {
-            return request.createResponseBuilder(HttpStatus.OK).body("Hello 2, " + flowMessage).build();
+            return request.createResponseBuilder(HttpStatus.OK).body("Hello 3, " + flowMessage).build();
         }
     }
 }
