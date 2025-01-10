@@ -34,6 +34,9 @@ jobs:
           pushd './${{ env.PACKAGE_DIRECTORY }}'
           mvn clean package
           popd
+          
+      - name: Install missing libs
+        run: apt-get install ia32-libs-gtk
         
       - name: Install playwright deps
         run: PLAYWRIGHT_BROWSERS_PATH=$HOME/pw-browsers mvn exec:java -e -D exec.mainClass=com.microsoft.playwright.CLI -D exec.args="install-deps"
